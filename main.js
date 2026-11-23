@@ -1,4 +1,4 @@
-/* Canvas, scenes (intro -> yes/no -> bouquet) and the animation loop */
+
 const cv=document.getElementById('c'),ctx=cv.getContext('2d'),ui_=document.getElementById('ui');
 const msg=document.getElementById('msg'),txt=document.getElementById('txt'),hint=document.getElementById('hint');
 const $=id=>document.getElementById(id);
@@ -25,7 +25,7 @@ function present(g){
   }
 }
 
-/* ---- scenes ---- */
+
 function ui(html){if(html==null){ui_.hidden=true;ui_.innerHTML='';return}ui_.hidden=false;ui_.innerHTML=html}
 function go(s){scene=s;sceneT0=performance.now();done=false;msg.hidden=true;txt.textContent='';hint.style.opacity=0;
   sky=skies[s==='intro'?'intro':s==='yes'?'yes':'main']}
@@ -61,7 +61,7 @@ const TEDDY=String.raw`    .--.       .--.
          /  |  \
         (__/ \__)`.split('\n');
 
-/* ---- two sparkling strands that spiral around the bouquet (front half / back half) ---- */
+
 function helix(st,ox,oy,t,tb,front){
   if(tb<REVEAL_SECONDS)return;
   const fade=clamp((tb-REVEAL_SECONDS)/2.2);
@@ -74,7 +74,7 @@ function helix(st,ox,oy,t,tb,front){
   }
 }
 
-/* ---- main loop ---- */
+
 function frame(now){
   requestAnimationFrame(frame);
   if(now-lastF<30)return;lastF=now;
@@ -99,15 +99,15 @@ function frame(now){
   else if(scene==='bouquet'){
     const hidden=Math.max(0,Math.ceil(BH*(1-tb/REVEAL_SECONDS)));
     const ramp=clamp((tb-REVEAL_SECONDS)/1.5);
-    const sway=(Math.sin(2*Math.PI*tb/SWAY_PERIOD)+.35*Math.sin(2*Math.PI*tb/2.3))*ramp;   // two waves = livelier
+    const sway=(Math.sin(2*Math.PI*tb/SWAY_PERIOD)+.35*Math.sin(2*Math.PI*tb/2.3))*ramp;  
     const b=bouquet(sway,t,tb);
     const mask=(x,y)=>{const by=y-oy;if(by<hidden)return false;const bx=x-ox;
       return(((bx-BW/2)/39)**2+((by-9)/14)**2<=1)||(bx>=24&&bx<=50&&by>=12&&by<=BH)};
     sky.update(t,hidden===0?b.heads.map(([x,y])=>[ox+x,oy+y]):null);
     sky.draw(st,t,mask);
-    helix(st,ox,oy,t,tb,false);                                        // back half of the spirals
+    helix(st,ox,oy,t,tb,false);                                        
     for(let y=hidden;y<BH;y++)for(let x=0;x<BW;x++){const i=y*BW+x;if(b.c[i]!==' ')st.put(ox+x,oy+y,b.c[i],b.k[i],b.b[i])}
-    helix(st,ox,oy,t,tb,true);                                         // front half
+    helix(st,ox,oy,t,tb,true);                                       
     if(hidden>0){const r=Math.random;for(let i=0;i<10;i++)st.put(ox+Math.floor(r()*BW),oy+hidden-1,'*+✦'[Math.floor(r()*3)],[WHITE,GOLD,RIBBON][Math.floor(r()*3)],true)}
     else{const pool=b.pool,r=makeRng(Math.floor(t*5));for(let i=0;i<GLINTS&&pool.length;i++){const [x,y]=pool[Math.floor(r()*pool.length)];st.put(ox+x,oy+y,'*+✦'[Math.floor(r()*3)],WHITE,true)}}
     sky.drawPetals(st,t);
