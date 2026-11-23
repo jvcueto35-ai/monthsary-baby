@@ -1,4 +1,4 @@
-/* A 2-D grid of (character, colour, bold) + small drawing helpers */
+
 class Grid{
   constructor(w,h){this.w=w;this.h=h;this.c=new Array(w*h).fill(' ');this.k=new Array(w*h).fill(null);this.b=new Uint8Array(w*h);this.heads=[];this.pool=[];this.opened=0}
   put(x,y,ch,k,b){x=Math.round(x);y=Math.round(y);if(x<0||y<0||x>=this.w||y>=this.h)return;const i=y*this.w+x;this.c[i]=ch;this.k[i]=k;this.b[i]=b?1:0}
