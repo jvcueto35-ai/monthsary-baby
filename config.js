@@ -1,16 +1,16 @@
-/* ===== everything you might want to tweak lives here ===== */
-const FINAL_MESSAGE = "Happy Monthsary, Bebu";
+
+const FINAL_MESSAGE = "Happy MonthsaryYY Bebushii!";
 const QUESTION = "Do you want to see your surprise? (Yes/No)";
 
-const BW = 64, BH = 37, KX = 32, KY = 25;     // bouquet grid size + ribbon knot position
-const N_ROSES = 12;                            // roses on the spiral (golden-angle arrangement)
-const DOME_X = 25, DOME_Y = 11;                // how wide / tall the rose dome is
-const SPIN_SPEED = 0.38;                       // how fast the whole bouquet turns (radians/sec)
-const SWAY_PERIOD = 5.6, SWAY_AMP = 3.4, FLUTTER = 0.55;   // bigger = more movement
+const BW = 64, BH = 37, KX = 32, KY = 25;    
+const N_ROSES = 12;                            
+const DOME_X = 25, DOME_Y = 11;                
+const SPIN_SPEED = 0.38;                       
+const SWAY_PERIOD = 5.6, SWAY_AMP = 3.4, FLUTTER = 0.55;   
 const MAX_PETALS = 22, PETAL_RATE = 2.6, GLINTS = 6;
 const REVEAL_SECONDS = 2.4, TYPE_START = 5.0, TYPE_SPEED = 0.09;
 
-// colour ramps, dark -> light
+
 const PAL = {
   pink:  ['#b0245f','#e0457f','#ff6fa0','#ff9cc0','#ffd0e0'],
   red:   ['#6e0f2a','#a3173d','#d62c55','#ff5577','#ff9bb0'],
