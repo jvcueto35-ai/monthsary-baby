@@ -1,4 +1,4 @@
-/* Twinkling stars, ray sparkles, shooting stars and falling petals */
+
 class Sky{
   constructor(cols,rows,density=.012,bigs=5,shoot=[2,4.5]){
     const r=Math.random,pick=a=>a[Math.floor(r()*a.length)];
